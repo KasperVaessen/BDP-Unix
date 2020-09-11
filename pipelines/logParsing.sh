@@ -19,7 +19,7 @@ echo "-- Q2 --"
 # Write a pipeline that returns the IP and path of larges size of the response to a POST request
 # so for example: 192.168.0.1,/actions/logout
 # hint: you could re-use accessData to make it easier
-largestResponse=$(cat access_log | grep "POST" |awk -F " " '{print $10, $1}' | sort -rn | awk -F " " '{print $2}' | head -1)
+largestResponse=$(cat access_log | grep "POST" |awk -F " " '{print $10, $1, $7}' | sort -rn | awk -F " " '{print $2, $3}' | head -1| tr ' ' ',')
 echo "The largest Response was to:"
 echo "$largestResponse"
 
@@ -29,7 +29,7 @@ echo "-- Q3 --"
 # Write a pipeline that returns the amount and IP of the client that did the most POST requests
 # so for example: 20 192.168.0.1
 # hint: you could re-use accessData to make it easier
-mostRequests=$(cat access_log | grep "POST" |awk -F " " '{print $1}' | uniq -c | sort -rn | awk -F " " '{print $2}' | head -1)
+mostRequests=$(cat access_log | grep "POST" |awk -F " " '{print $1}' | uniq -c | sort -rn | awk -F " " '{print $1, $2}' | head -1)
 echo "The most requests where done by:"
 echo "$mostRequests"
 
